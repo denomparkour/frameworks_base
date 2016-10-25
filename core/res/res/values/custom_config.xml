@@ -29,4 +29,7 @@
   
       <!-- Shows the required view for in-display fingerprint -->
     <bool name="config_supportsInDisplayFingerprint">false</bool>
+
+   <!-- Whether notify fingerprint client of successful cancelled authentication -->
+    <bool name="config_notifyClientOnFingerprintCancelSuccess">false</bool>
 </resources>
