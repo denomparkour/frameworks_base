@@ -39,4 +39,8 @@
     <bool name="config_audioPanelOnLeftSide">false</bool>
 
    <bool name="config_display_vowifi">true</bool>
+
+    <!-- Burn in protection -->
+    <bool name="config_statusBarBurnInProtection">false</bool>
+    <integer name="config_shift_interval">60</integer>
 </resources>
