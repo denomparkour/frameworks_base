@@ -30,4 +30,5 @@
     <string name="global_action_screenrecord">Screenrecord</string>
     <string name="global_action_flashlight">Flashlight</string>
 
+   <string name="statusbar_items_title">Statusbar icons</string>
 </resources>
