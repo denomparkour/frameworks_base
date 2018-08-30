@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Handler;
@@ -43,6 +44,8 @@ import androidx.core.graphics.ColorUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
+import com.android.systemui.Interpolators;
+import com.android.systemui.omni.CurrentWeatherView;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 
 import java.io.FileDescriptor;
@@ -80,6 +83,10 @@ public class KeyguardStatusView extends GridLayout implements
     private int mIconTopMarginWithHeader;
     private boolean mShowingHeader;
 
+    private float mWidgetPadding;
+    private int mLastLayoutHeight;
+    private CurrentWeatherView mWeatherView;
+
     private KeyguardUpdateMonitorCallback mInfoCallback = new KeyguardUpdateMonitorCallback() {
 
         @Override
@@ -99,6 +106,7 @@ public class KeyguardStatusView extends GridLayout implements
                 refreshTime();
                 updateOwnerInfo();
                 updateLogoutView();
+                updateSettings();
             }
         }
 
@@ -196,6 +204,9 @@ public class KeyguardStatusView extends GridLayout implements
         }
         mOwnerInfo = findViewById(R.id.owner_info);
         mKeyguardSlice = findViewById(R.id.keyguard_status_area);
+
+        mWeatherView = (CurrentWeatherView) findViewById(R.id.weather_container);
+
         mTextColor = mClockView.getCurrentTextColor();
 
         mKeyguardSlice.setContentChangeListener(this::onSliceContentChanged);
@@ -207,6 +218,7 @@ public class KeyguardStatusView extends GridLayout implements
         updateOwnerInfo();
         updateLogoutView();
         updateDark();
+
     }
 
     /**
@@ -247,6 +259,10 @@ public class KeyguardStatusView extends GridLayout implements
                     getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
         }
         loadBottomMargin();
+
+        if (mWeatherView != null) {
+            mWeatherView.onDensityOrFontScaleChanged();
+        }
     }
 
     public void dozeTimeTick() {
@@ -472,4 +488,24 @@ public class KeyguardStatusView extends GridLayout implements
             Log.e(TAG, "Failed to logout user", re);
         }
     }
+
+    private void updateSettings() {
+        final ContentResolver resolver = getContext().getContentResolver();
+        final Resources res = getContext().getResources();
+        boolean showWeather = Settings.System.getIntForUser(resolver,
+                Settings.System.OMNI_LOCKSCREEN_WEATHER_ENABLED, 0,
+                UserHandle.USER_CURRENT) == 1;
+
+        if (mWeatherView != null) {
+            if (showWeather) {
+                mWeatherView.setVisibility(View.VISIBLE);
+                mWeatherView.enableUpdates();
+            }
+            if (!showWeather) {
+                mWeatherView.setVisibility(View.GONE);
+                mWeatherView.disableUpdates();
+            }
+        }
+    }
+
 }
