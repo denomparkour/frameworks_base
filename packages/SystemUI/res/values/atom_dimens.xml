@@ -22,4 +22,10 @@
 
     <dimen name="qs_tile_height_wo_label">48dp</dimen>
 
+  <!-- Pocket Lock -->
+  <java-symbol type="layout" name="pocket_lock_view_layout" />
+  <java-symbol type="id" name="pocket_hint_container" />
+  <java-symbol type="id" name="pocket_hint_image" />
+  <java-symbol type="id" name="pocket_hint_message" />
+
 </resources>
