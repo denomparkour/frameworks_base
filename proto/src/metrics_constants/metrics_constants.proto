@@ -7432,6 +7432,9 @@ message MetricsEvent {
     // QS Tiles
     CUSTOM_TILE = 9998;
 
+    // ATOM Metrics
+    ATOM = 2772;
+
   }
 }
 
