@@ -4787,12 +4787,6 @@ public final class Settings {
         public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
 
         /**
-         * Whether to enable our custom black theme
-         * @hide
-         */
-        public static final String ENABLE_DARKER_THEME = "enable_darker_theme";
-
-        /**
          * @hide
          */
         public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
