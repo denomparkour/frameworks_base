@@ -32,6 +32,9 @@
 
    <string name="statusbar_items_title">Statusbar icons</string>
 
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+
     <!-- QS Config -->
     <string name="qs_menu_item_columns">Columns</string>
     <string name="qs_menu_item_columns_landscape">Columns landscape</string>
