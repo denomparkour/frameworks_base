@@ -7435,6 +7435,7 @@ message MetricsEvent {
     // ATOM Metrics
     ATOM = 2772;
    ATOM_SETTINGS = 2780;
+   CUSTOM_SETTINGS = 2800;
 
   }
 }
